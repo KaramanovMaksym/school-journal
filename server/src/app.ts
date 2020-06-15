@@ -2,11 +2,13 @@ import express, {Application, Request, Response, NextFunction } from 'express'
 import config from 'config'
 import db from 'mongoose'
 import schoolRouter from './routes/school.route'
+import teacherRouter from './routes/teacher.route'
 
 const app: Application = express()
 
 app.use(express.json())
 app.use('/api/schools', schoolRouter)
+app.use('/api/teachers', teacherRouter)
 
 const PORT: number = config.get('port') || 5000
 const DB_URI: string = config.get('mongoURI')
