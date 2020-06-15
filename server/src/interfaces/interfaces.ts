@@ -3,13 +3,13 @@ import {Document} from 'mongoose'
 export interface ISchool extends Document {
     name: string
     director?: string
-    phoneNumbers?: Array<number>
+    phoneNumbers?: number[]
     address?: string
 }
 
 export interface ITeacher extends Document {
     name: IName
-    phoneNumbers?: Array<number>
+    phoneNumbers?: number[]
     address?: string
 }
 
@@ -24,7 +24,7 @@ export interface IStudent extends Document {
     class_id: ID
     name: IName
     healthGroup: HealthGroup
-    phoneNumbers?: Array<number>
+    phoneNumbers?: number[]
     address?: string
 }
 

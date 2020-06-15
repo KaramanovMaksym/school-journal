@@ -9,16 +9,16 @@ const schoolRouter: Router = Router()
 schoolRouter.get('/', schoolController.getAllSchools)
 
 // Get School by ID
-schoolRouter.get('/:schoolID', schoolController.getSchool)
+schoolRouter.get('/:documentID', schoolController.getSchool)
 
 // Create new School document
 schoolRouter.post('/', schoolController.addSchool)
 
 // Delete School document by ID
-schoolRouter.delete('/:schoolID', schoolController.deleteSchool)
+schoolRouter.delete('/:documentID', schoolController.deleteSchool)
 
 // Update School document by ID
-schoolRouter.patch('/:schoolID', schoolController.updateSchool)
+schoolRouter.patch('/:documentID', schoolController.updateSchool)
 
 
 export default schoolRouter
