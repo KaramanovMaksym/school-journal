@@ -1,8 +1,7 @@
 import express, {Application, Request, Response, NextFunction } from 'express'
 import config from 'config'
 import db from 'mongoose'
-import schoolRouter from './routes/school.route'
-import teacherRouter from './routes/teacher.route'
+import { schoolRouter, teacherRouter, studentRouter } from './routes'
 
 const app: Application = express()
 
