@@ -28,7 +28,7 @@ export const addSchool: ControllerFunction =  async (req, res) => {
         return res
             .status(201)
             .json({
-                message: 'Handling POST request to /schools',
+                message: 'Create school successfully',
                 newSchool: dbResponse,
             })
 

@@ -2,7 +2,7 @@ import {Schema, model, Types} from 'mongoose'
 import { IStudent } from '../interfaces/interfaces'
 
 const StudentSchema: Schema = new Schema({
-    class_id: {type: Types.ObjectId, required: true},
+    class_id: {type: Types.ObjectId, ref: 'Classes', required: true },
     name: {
         firstName: {type: String, required: true},
         lastName: {type: String, required: true},
