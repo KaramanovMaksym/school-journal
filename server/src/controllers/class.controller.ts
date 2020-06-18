@@ -1,26 +1,26 @@
-import { ISchool } from '../interfaces/interfaces'
-import School from '../models/School'
+import { IClass } from '../interfaces/interfaces'
+import Class from '../models/Class'
 import { Response, Request } from 'express'
 import { getAllDocuments, getDocument } from './helpers'
 
 type ControllerFunction = (req: Request, res: Response) => Promise<Response> 
 
-export const getAllSchools: ControllerFunction = async (req, res) => await getAllDocuments(School, req, res)
+export const getAllClasses: ControllerFunction = async (req, res) => await getAllDocuments(Class, req, res)
 
-export const getSchool: ControllerFunction =  async (req, res) => await getDocument(School, req, res)
+export const getClass: ControllerFunction =  async (req, res) => await getDocument(Class, req, res)
 
-export const addSchool: ControllerFunction =  async (req, res) => {
+export const addClass: ControllerFunction =  async (req, res) => {
     try {
-        const { name, director, address, phoneNumbers }: ISchool = req.body
+        const { school_id, headTeacher_id, classNumber, classLetter }: IClass = req.body
 
-        const newSchool: ISchool = new School({
-            name,
-            director,
-            address,
-            phoneNumbers,
+        const newClass: IClass = new Class({
+            school_id,
+            headTeacher_id,
+            classNumber,
+            classLetter,
         })
 
-        const dbResponse = await newSchool.save()
+        const dbResponse = await newClass.save()
 
         console.log('dbResponse outer', dbResponse)
 
@@ -28,8 +28,8 @@ export const addSchool: ControllerFunction =  async (req, res) => {
         return res
             .status(201)
             .json({
-                message: 'Create school successfully',
-                newSchool: dbResponse,
+                message: 'Create class successfully',
+                newClass: dbResponse,
             })
 
     } catch (err) {
@@ -39,26 +39,26 @@ export const addSchool: ControllerFunction =  async (req, res) => {
     }
 }
 
-export const deleteSchool: ControllerFunction = async (req, res) => {
+export const deleteClass: ControllerFunction = async (req, res) => {
     try {
         const _id: string = req.params.documentID
-        const deleteResult = await School.deleteOne({_id})
+        const deleteResult = await Class.deleteOne({_id})
         
         if (!deleteResult.ok) {
             return res
                 .status(404)
-                .json({ message: `School with ID=${_id} didn\'t delete` })
+                .json({ message: `Class with ID=${_id} didn\'t delete` })
         }
         
         if (!deleteResult.deletedCount) {
             return res
                 .status(404)
-                .json({ message: `School with ID=${_id} doesn't exist` })
+                .json({ message: `Class with ID=${_id} doesn't exist` })
         }
 
         return res
             .status(200)
-            .json({ message: `School ID=${_id} deleted`, deleteResult })
+            .json({ message: `Class ID=${_id} deleted`, deleteResult })
 
     } catch (err) {
         return res
@@ -67,13 +67,13 @@ export const deleteSchool: ControllerFunction = async (req, res) => {
     }
 }
 
-export const updateSchool: ControllerFunction = async (req, res) => {
+export const updateClass: ControllerFunction = async (req, res) => {
     try {
         const _id: string = req.params.documentID
-        const school: ISchool = req.body
-        const updateResult = await School.update(
+        const updatedClass: IClass = req.body
+        const updateResult = await Class.update(
             { _id },
-            { $set: { ...school } }
+            { $set: { ...updatedClass } }
         )
         
         if (!updateResult.ok) {
@@ -82,7 +82,7 @@ export const updateSchool: ControllerFunction = async (req, res) => {
 
         return res
             .status(200)
-            .json({ message: `School ID=${_id} updated`, updateResult })
+            .json({ message: `Class ID=${_id} updated`, updateResult })
 
     } catch (err) {
         return res
