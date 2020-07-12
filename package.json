@@ -1,0 +1,13 @@
+{
+  "name": "school-journal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server:dev": "cd server && npm run dev",
+    "client:dev": "cd client && npm run dev"
+  },
+  "keywords": [],
+  "author": "Karamanov Maksym",
+  "license": "ISC"
+}
